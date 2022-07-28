@@ -19,6 +19,13 @@ app.use(express.json())
 // 设置静态资源文件夹
 app.use(express.static(path.join(__dirname + 'public')))
 
+// 文件上传
+app.post(
+  '/upload',
+  require('./middleware/upload').single('file'),
+  require('./controller/upload').upload
+)
+
 // 用户相关路由
 app.use('/api', require('./router'))
 
